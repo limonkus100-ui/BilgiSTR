@@ -3,9 +3,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const svg = document.querySelector("svg");
   if (!svg) return;
 
-  // -------------------------------
-  // 195 ÜLKENİN ADLARI
-  // -------------------------------
   const countryNames = {
     "af":"Afganistan","al":"Arnavutluk","dz":"Cezayir","ad":"Andorra","ao":"Angola","ag":"Antigua ve Barbuda",
     "ar":"Arjantin","am":"Ermenistan","au":"Avustralya","at":"Avusturya","az":"Azerbaycan","bs":"Bahamalar",
@@ -53,24 +50,15 @@ document.addEventListener("DOMContentLoaded", function () {
     "zm":"Zambiya","zw":"Zimbabve"
   };
 
-  // -------------------------------
-  // METİN ŞABLONU
-  // -------------------------------
   const countryTexts = {};
   for(let code in countryNames){
     countryTexts[code] = `${countryNames[code]} hakkında bilgi buraya gelecek.`;
   }
 
-  // -------------------------------
-  // ÜLKE KODU DÜZELTMELERİ
-  // -------------------------------
   const fixMap = {
     turkey:"tr", usa:"us", france:"fr", germany:"de", england:"gb", uk:"gb"
   };
 
-  // -------------------------------
-  // SVG TIKLAMA OLAYI
-  // -------------------------------
   svg.addEventListener("click", function(e){
     let target = e.target.closest("path, polygon, g");
     if(!target) return;
@@ -100,9 +88,21 @@ document.addEventListener("DOMContentLoaded", function () {
           h1 { margin-top: 0; }
           p { font-size: 16px; line-height: 1.6; }
           video { width: 100%; margin-top: 15px; }
+          .closeButton {
+            display: inline-block;
+            padding: 8px 12px;
+            background: #DC3545;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            cursor: pointer;
+          }
+          .closeButton:hover { background: #a71d2a; }
         </style>
       </head>
       <body>
+        <button class="closeButton" onclick="window.close()">✕ Sekmeyi Kapat</button>
         <h1>${name}</h1>
         <p>${text}</p>
         <video id="countryVideo" autoplay muted controls>
@@ -113,11 +113,6 @@ document.addEventListener("DOMContentLoaded", function () {
       </html>
     `);
 
-    // -------------------------------
-    // Artık sekme kapandığında video durdurma yok
-    // -------------------------------
-
   });
 
 });
-
