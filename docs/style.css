@@ -1,0 +1,62 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f0f9ff;
+  color: #0f172a;
+}
+
+.title {
+  text-align: center;
+  padding: 12px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+#country-label {
+  text-align: center;
+  font-size: 18px;
+  margin: 10px 0;
+  font-weight: 500;
+}
+
+.map-container {
+  width: 100%;
+  height: 90vh;
+}
+
+.country {
+  fill: #60a5fa;
+  stroke: #1e3a8a;
+  stroke-width: 0.6;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.country:hover {
+  fill: #22c55e;
+}
+
+.country.active {
+  fill: #f97316;
+}
+svg path {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+/* Haritadaki tüm ülke şekilleri */
+svg path,
+svg polygon,
+svg rect,
+svg g {
+  transition: fill 0.3s ease;
+  cursor: pointer;
+}
+
+/* Üzerine gelince turuncu yap */
+svg path:hover,
+svg polygon:hover,
+svg rect:hover,
+svg g:hover {
+  fill: orange !important;
+}
+

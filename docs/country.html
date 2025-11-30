@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Ülke Bilgisi</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  padding: 30px;
+}
+h1 {
+  font-size: 36px;
+}
+.info {
+  margin-top: 20px;
+  font-size: 18px;
+  line-height: 1.6;
+}
+</style>
+</head>
+<body>
+
+<h1 id="ulkeAdi">Yükleniyor...</h1>
+<div class="info" id="bilgi">Lütfen bekleyin...</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const code = params.get("code");
+
+// TÜM DÜNYA ÜLKELERİ İÇİN CANLI VERİ
+fetch("https://restcountries.com/v3.1/alpha/" + code)
+  .then(res => res.json())
+  .then(data => {
+    const ulke = data[0];
+
+    document.getElementById("ulkeAdi").textContent = ulke.name.common;
+    document.getElementById("bilgi").innerHTML = `
+      <b>Başkent:</b> ${ulke.capital ? ulke.capital[0] : "Bilinmiyor"}<br>
+      <b>Nüfus:</b> ${ulke.population.toLocaleString()}<br>
+      <b>Bölge:</b> ${ulke.region}<br>
+      <b>Alt Bölge:</b> ${ulke.subregion || "Yok"}<br>
+      <b>Para Birimi:</b> ${ulke.currencies ? Object.keys(ulke.currencies).join(", ") : "Yok"}<br>
+      <b>Dil:</b> ${ulke.languages ? Object.values(ulke.languages).join(", ") : "Yok"}
+    `;
+  })
+  .catch(() => {
+    document.getElementById("bilgi").textContent = "Ülke bilgisi yüklenemedi.";
+  });
+</script>
+
+</body>
+</html>
