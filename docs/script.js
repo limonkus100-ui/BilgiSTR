@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const text = countryTexts[countryCode] || "Bu ülke için metin eklenmemiş.";
 
     // -------------------------------
-    // Yeni Sekme Aç ve Video Otomatik Başlat
+    // VİDEO KISMI — EKLEME YAPILDI
     // -------------------------------
     const newTab = window.open("", "_blank");
 
@@ -98,16 +98,16 @@ document.addEventListener("DOMContentLoaded", function () {
             margin-bottom: 10px;
             cursor: pointer;
           }
-          .closeButton:hover { background: #a71d2a; }
         </style>
       </head>
       <body>
         <button class="closeButton" onclick="window.close()">✕ Sekmeyi Kapat</button>
         <h1>${name}</h1>
         <p>${text}</p>
-        <video id="countryVideo" autoplay muted controls>
+
+        <video autoplay muted controls
+          onerror="alert('Video bulunamadı: ' + this.currentSrc); window.close();">
           <source src="video/${countryCode}.mp4" type="video/mp4">
-          Tarayıcınız video etiketini desteklemiyor.
         </video>
       </body>
       </html>
