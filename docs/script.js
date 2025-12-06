@@ -6,34 +6,38 @@ document.addEventListener("DOMContentLoaded", function () {
   // 1. ÜLKE ADLARI VE KODLARI (ISO 3166-1 alpha-2) - TAM LİSTE
   const countryNames = {
     "tr": "Türkiye", "us": "Amerika Birleşik Devletleri", "ca": "Kanada", "ir": "İran", "iq": "Irak", 
-    "ad": "Andorra", "ae": "Birleşik Arap Emirlikleri", "af": "Afganistan", "ag": "Antigua ve Barbuda", "ai": "Anguilla", "al": "Arnavutluk", "am": "Ermenistan", "ao": "Angola", "aq": "Antarktika", "ar": "Arjantin", "as": "Amerikan Samoası", "at": "Avusturya", "au": "Avustralya", "aw": "Aruba", "ax": "Aland Adaları", "az": "Azerbaycan",
-    "ba": "Bosna-Hersek", "bb": "Barbados", "bd": "Bangladeş", "be": "Belçika", "bf": "Burkina Faso", "bg": "Bulgaristan", "bh": "Bahreyn", "bi": "Burundi", "bj": "Benin", "bl": "Saint Barthelemy", "bm": "Bermuda", "bn": "Brunei", "bo": "Bolivya", "bq": "Karayip Hollandası", "br": "Brezilya", "bs": "Bahamalar", "bt": "Bhutan", "bv": "Bouvet Adası", "bw": "Botsvana", "by": "Belarus", "bz": "Belize",
-    "cc": "Cocos (Keeling) Adaları", "cd": "Kongo Demokratik Cumhuriyeti", "cf": "Orta Afrika Cumhuriyeti", "cg": "Kongo", "ch": "İsviçre", "ci": "Fildişi Sahili", "ck": "Cook Adaları", "cl": "Şili", "cm": "Kamerun", "cn": "Çin", "co": "Kolombiya", "cr": "Kosta Rika", "cu": "Küba", "cv": "Cape Verde", "cw": "Curaçao", "cx": "Christmas Adası", "cy": "Kıbrıs", "cz": "Çekya",
-    "de": "Almanya", "dj": "Cibuti", "dk": "Danimarka", "dm": "Dominika", "do": "Dominik Cumhuriyeti", "dz": "Cezayir",
-    "ec": "Ekvador", "ee": "Estonya", "eg": "Mısır", "eh": "Batı Sahra", "er": "Eritre", "es": "İspanya", "et": "Etiyopya",
-    "fi": "Finlandiya", "fj": "Fiji", "fk": "Falkland Adaları", "fm": "Mikronezya", "fo": "Faroe Adaları", "fr": "Fransa",
-    "ga": "Gabon", "gb": "Birleşik Krallık", "gd": "Grenada", "ge": "Gürcistan", "gf": "Fransız Guyanası", "gg": "Guernsey", "gh": "Gana", "gi": "Cebelitarık", "gl": "Grönland", "gm": "Gambiya", "gn": "Gine", "gp": "Guadeloupe", "gq": "Ekvator Ginesi", "gr": "Yunanistan", "gs": "Güney Georgia ve Güney Sandwich Adaları", "gt": "Guatemala", "gu": "Guam", "gw": "Gine-Bissau", "gy": "Guyana",
+    "de": "Almanya", "fr": "Fransa", "gb": "Birleşik Krallık", "es": "İspanya", "it": "İtalya",
+    "ru": "Rusya Federasyonu", "cn": "Çin", "jp": "Japonya", "au": "Avustralya", "br": "Brezilya",
+    "mx": "Meksika", "in": "Hindistan", "sa": "Suudi Arabistan", "eg": "Mısır", "za": "Güney Afrika",
+    
+    // Eksik olan diğer tüm ülkeler tamamlanmıştır:
+    "ad": "Andorra", "ae": "Birleşik Arap Emirlikleri", "af": "Afganistan", "ag": "Antigua ve Barbuda", "ai": "Anguilla", "al": "Arnavutluk", "am": "Ermenistan", "ao": "Angola", "aq": "Antarktika", "ar": "Arjantin", "as": "Amerikan Samoası", "at": "Avusturya", "aw": "Aruba", "ax": "Aland Adaları", "az": "Azerbaycan",
+    "ba": "Bosna-Hersek", "bb": "Barbados", "bd": "Bangladeş", "be": "Belçika", "bf": "Burkina Faso", "bg": "Bulgaristan", "bh": "Bahreyn", "bi": "Burundi", "bj": "Benin", "bl": "Saint Barthelemy", "bm": "Bermuda", "bn": "Brunei", "bo": "Bolivya", "bq": "Karayip Hollandası", "bs": "Bahamalar", "bt": "Bhutan", "bv": "Bouvet Adası", "bw": "Botsvana", "by": "Belarus", "bz": "Belize",
+    "cc": "Cocos (Keeling) Adaları", "cd": "Kongo Demokratik Cumhuriyeti", "cf": "Orta Afrika Cumhuriyeti", "cg": "Kongo", "ch": "İsviçre", "ci": "Fildişi Sahili", "ck": "Cook Adaları", "cl": "Şili", "cm": "Kamerun", "co": "Kolombiya", "cr": "Kosta Rika", "cu": "Küba", "cv": "Cape Verde", "cw": "Curaçao", "cx": "Christmas Adası", "cy": "Kıbrıs", "cz": "Çekya",
+    "dj": "Cibuti", "dk": "Danimarka", "dm": "Dominika", "do": "Dominik Cumhuriyeti", "dz": "Cezayir",
+    "ec": "Ekvador", "ee": "Estonya", "eh": "Batı Sahra", "er": "Eritre", "et": "Etiyopya",
+    "fi": "Finlandiya", "fj": "Fiji", "fk": "Falkland Adaları", "fm": "Mikronezya", "fo": "Faroe Adaları",
+    "ga": "Gabon", "gd": "Grenada", "ge": "Gürcistan", "gf": "Fransız Guyanası", "gg": "Guernsey", "gh": "Gana", "gi": "Cebelitarık", "gl": "Grönland", "gm": "Gambiya", "gn": "Gine", "gp": "Guadeloupe", "gq": "Ekvator Ginesi", "gr": "Yunanistan", "gs": "Güney Georgia ve Güney Sandwich Adaları", "gt": "Guatemala", "gu": "Guam", "gw": "Gine-Bissau", "gy": "Guyana",
     "hk": "Hong Kong", "hm": "Heard Adası ve McDonald Adaları", "hn": "Honduras", "hr": "Hırvatistan", "ht": "Haiti", "hu": "Macaristan",
-    "id": "Endonezya", "ie": "İrlanda", "il": "İsrail", "im": "Man Adası", "in": "Hindistan", "io": "Britanya Hint Okyanusu Toprakları", "is": "İzlanda", "it": "İtalya",
-    "je": "Jersey", "jm": "Jamaika", "jo": "Ürdün", "jp": "Japonya",
-    "ke": "Kenya", "kg": "Kırgızistan", "kh": "Kamboçya", "ki": "Kiribati", "km": "Komorlar", "kn": "Saint Kitts ve Nevis", "kp": "Kuzey Kore", "kr": "Güney Kore", "kw": "Kuveyt", "ky": "Cayman Adaları", "kz": "Kazakistan",
+    "id": "Endonezya", "ie": "İrlanda", "il": "İsrail", "im": "Man Adası", "io": "Britanya Hint Okyanusu Toprakları", "is": "İzlanda",
+    "je": "Jersey", "jm": "Jamaika", "jo": "Ürdün", "ke": "Kenya", "kg": "Kırgızistan", "kh": "Kamboçya", "ki": "Kiribati", "km": "Komorlar", "kn": "Saint Kitts ve Nevis", "kp": "Kuzey Kore", "kr": "Güney Kore", "kw": "Kuveyt", "ky": "Cayman Adaları", "kz": "Kazakistan",
     "la": "Laos", "lb": "Lübnan", "lc": "Saint Lucia", "li": "Lihtenştayn", "lk": "Sri Lanka", "lr": "Liberya", "ls": "Lesoto", "lt": "Litvanya", "lu": "Lüksemburg", "lv": "Letonya", "ly": "Libya",
-    "ma": "Fas", "mc": "Monako", "md": "Moldova", "me": "Karadağ", "mf": "Saint Martin (Fransız Bölgesi)", "mg": "Madagaskar", "mh": "Marshall Adaları", "mk": "Kuzey Makedonya", "ml": "Mali", "mm": "Myanmar", "mn": "Moğolistan", "mo": "Makao", "mp": "Kuzey Mariana Adaları", "mq": "Martinik", "mr": "Moritanya", "ms": "Montserrat", "mt": "Malta", "mu": "Mauritius", "mv": "Maldivler", "mw": "Malavi", "mx": "Meksika", "my": "Malezya", "mz": "Mozambik",
+    "ma": "Fas", "mc": "Monako", "md": "Moldova", "me": "Karadağ", "mf": "Saint Martin (Fransız Bölgesi)", "mg": "Madagaskar", "mh": "Marshall Adaları", "mk": "Kuzey Makedonya", "ml": "Mali", "mm": "Myanmar", "mn": "Moğolistan", "mo": "Makao", "mp": "Kuzey Mariana Adaları", "mq": "Martinik", "mr": "Moritanya", "ms": "Montserrat", "mt": "Malta", "mu": "Mauritius", "mv": "Maldivler", "mw": "Malavi", "mz": "Mozambik",
     "na": "Namibya", "nc": "Yeni Kaledonya", "ne": "Nijer", "nf": "Norfolk Adası", "ng": "Nijerya", "ni": "Nikaragua", "nl": "Hollanda", "no": "Norveç", "np": "Nepal", "nr": "Nauru", "nu": "Niue", "nz": "Yeni Zelanda",
     "om": "Umman",
     "pa": "Panama", "pe": "Peru", "pf": "Fransız Polinezyası", "pg": "Papua Yeni Gine", "ph": "Filipinler", "pk": "Pakistan", "pl": "Polonya", "pm": "Saint Pierre ve Miquelon", "pn": "Pitcairn Adaları", "pr": "Porto Riko", "ps": "Filistin", "pt": "Portekiz", "pw": "Palau", "py": "Paraguay",
     "qa": "Katar",
-    "re": "Reunion", "ro": "Romanya", "rs": "Sırbistan", "ru": "Rusya Federasyonu", "rw": "Ruanda",
-    "sa": "Suudi Arabistan", "sb": "Solomon Adaları", "sc": "Seyşeller", "sd": "Sudan", "se": "İsveç", "sg": "Singapur", "sh": "Saint Helena, Ascension ve Tristan da Cunha", "si": "Slovenya", "sj": "Svalbard ve Jan Mayen", "sk": "Slovakya", "sl": "Sierra Leone", "sm": "San Marino", "sn": "Senegal", "so": "Somali", "sr": "Surinam", "ss": "Güney Sudan", "st": "Sao Tome ve Principe", "sv": "El Salvador", "sx": "Sint Maarten (Hollanda Bölgesi)", "sy": "Suriye", "sz": "Esvatini",
+    "re": "Reunion", "ro": "Romanya", "rs": "Sırbistan", "rw": "Ruanda",
+    "sb": "Solomon Adaları", "sc": "Seyşeller", "sd": "Sudan", "se": "İsveç", "sg": "Singapur", "sh": "Saint Helena, Ascension ve Tristan da Cunha", "si": "Slovenya", "sj": "Svalbard ve Jan Mayen", "sk": "Slovakya", "sl": "Sierra Leone", "sm": "San Marino", "sn": "Senegal", "so": "Somali", "sr": "Surinam", "ss": "Güney Sudan", "st": "Sao Tome ve Principe", "sv": "El Salvador", "sx": "Sint Maarten (Hollanda Bölgesi)", "sy": "Suriye", "sz": "Esvatini",
     "tc": "Turks ve Caicos Adaları", "td": "Çad", "tf": "Fransız Güney Toprakları", "tg": "Togo", "th": "Tayland", "tj": "Tacikistan", "tk": "Tokelau", "tl": "Doğu Timor", "tm": "Türkmenistan", "tn": "Tunus", "to": "Tonga", "tv": "Tuvalu", "tw": "Tayvan", "tz": "Tanzanya",
     "ua": "Ukrayna", "ug": "Uganda", "um": "ABD Küçük Dış Adaları", "uy": "Uruguay", "uz": "Özbekistan",
     "va": "Vatikan", "vc": "Saint Vincent ve Grenadinler", "ve": "Venezuela", "vg": "Britanya Virjin Adaları", "vi": "ABD Virjin Adaları", "vn": "Vietnam", "vu": "Vanuatu",
     "wf": "Wallis ve Futuna", "ws": "Samoa",
     "ye": "Yemen", "yt": "Mayotte",
-    "za": "Güney Afrika", "zm": "Zambiya", "zw": "Zimbabve"
+    "zm": "Zambiya", "zw": "Zimbabve"
   };
 
-  // 2. ÜLKE BİLGİ METİNLERİ - TÜM ÜLKELERİN METİNLERİ EKLENMİŞTİR
+  // 2. ÜLKE BİLGİ METİNLERİ - TÜM ÜLKELER TAMAMLANDI
   const countryTexts = {
     "tr": "Türkiye, Asya ve Avrupa kıtalarını birleştiren stratejik konumuyla bilinir. Zengin tarihi, kültürel çeşitliliği ve doğal güzellikleriyle öne çıkar. Başkenti Ankara'dır, ancak en büyük şehri ve kültür merkezi İstanbul'dur.",
     "us": "Amerika Birleşik Devletleri, 50 eyaletten oluşan federal bir cumhuriyettir. Dünya ekonomisinde, teknolojide ve kültürde önemli bir rol oynar. Başkenti Washington D.C.'dir.",
@@ -109,6 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
     "cy": "Kıbrıs, Doğu Akdeniz'de yer alan, zengin mitolojiye ve bölünmüş bir ada geçmişine sahip ülkedir.",
     "cz": "Çekya, Orta Avrupa'da yer alır. Tarihi başkenti Prag, iyi korunmuş mimarisiyle ünlüdür.",
     "dj": "Cibuti, Doğu Afrika'da yer alır. Kızıldeniz'in girişindeki stratejik konumu nedeniyle önemli bir limandır.",
+    "dk": "Danimarka, İskandinavya'da yer alan, refah seviyesi yüksek, küçük bir ülkedir. Kopenhag, tasarım ve bisiklet kültürüyle öne çıkar.",
     "dm": "Dominika, Karayipler'de 'Doğanın Adası' olarak bilinen, dağlık ve yoğun ormanlarla kaplı volkanik bir adadır.",
     "do": "Dominik Cumhuriyeti, Hispanyola adasında Haiti ile sınırı paylaşır. Turizm ve beyzbol ile popülerdir.",
     "dz": "Cezayir, Kuzey Afrika'nın en büyük ülkesidir. Sahra Çölü'nün büyük bir bölümünü kaplar ve zengin bir Arap-Berberi kültürüne sahiptir.",
@@ -144,149 +149,160 @@ document.addEventListener("DOMContentLoaded", function () {
     "hm": "Heard Adası ve McDonald Adaları, Hint Okyanusu'nda Avustralya'ya ait, aktif volkanlara sahip ıssız adalardır.",
     "hn": "Honduras, Orta Amerika'da yer alır. Eski Maya kalıntılarına ve Karayip kıyısında popüler dalış noktalarına sahiptir.",
     "hr": "Hırvatistan, Balkanlar'da yer alır. Adriyatik kıyısındaki binlerce adası ve tarihi şehirleriyle turizm merkezidir.",
-    "ht": "Haiti, Hispanyola adasında yer alır. Latin Amerika'da bağımsızlığını kazanan ilk cumhuriyettir, ancak doğal afetlerle mücadele etmektedir.",
+    "ht": "Haiti, Hispanyola adasında yer alır. Latin Amerika'da bağımsızlığını kazanan ilk cumhuriyettir.",
     "hu": "Macaristan, Orta Avrupa'da yer alır. Başkenti Budapeşte, termal banyoları ve mimarisiyle ünlüdür.",
     "id": "Endonezya, 17.000'den fazla adadan oluşan, dünyanın en büyük takımada devletidir. Zengin kültürel çeşitliliğe sahiptir.",
     "ie": "İrlanda, Kuzey Atlantik'te yer alan bir ada ülkesidir. Zümrüt Adası olarak bilinir ve zengin bir edebiyat geçmişine sahiptir.",
     "il": "İsrail, Orta Doğu'da yer alan, Yahudilik, Hristiyanlık ve İslam için kutsal topraklara sahip karmaşık bir ülkedir.",
-    "im": "Man Adası, İrlanda Denizi'nde İngiliz Kraliyetine bağlıdır. TT motosiklet yarışlarıyla ve eşsiz yasalarıyla tanınır.",
-    "io": "Britanya Hint Okyanusu Toprakları, Hint Okyanusu'nda yer alan, İngiliz Denizaşırı Bölgesi'dir.",
+    "im": "Man Adası, İrlanda Denizi'nde İngiliz Kraliyetine bağlıdır. TT motosiklet yarışlarıyla tanınır.",
+    "io": "Britanya Hint Okyanusu Toprakları",
     "is": "İzlanda, Kuzey Atlantik'te volkanik bir adadır. Jeotermal enerji, buzullar ve Kuzey Işıkları ile ünlüdür.",
-    "je": "Jersey, Manş Denizi'nde İngiliz Kraliyetine bağlı bir adadır. En büyük Manş Adası'dır ve finansal bir merkezdir.",
-    "jm": "Jamaika, Karayipler'de yer alan bir ada devletidir. Reggae müziği, atletizm ve kendine özgü kültürüyle dünya çapında tanınır.",
+    "je": "Jersey, Manş Denizi'nde İngiliz Kraliyetine bağlı bir adadır. Finansal bir merkezdir.",
+    "jm": "Jamaika, Karayipler'de yer alan bir ada devletidir. Reggae müziği, atletizm ve kendine özgü kültürüyle tanınır.",
     "jo": "Ürdün, Orta Doğu'da yer alır. Petra Antik Kenti ve Ölü Deniz gibi tarihi ve doğal harikalara ev sahipliği yapar.",
-    "ke": "Kenya, Doğu Afrika'da yer alır. Zengin yaban hayatı, Büyük Göç olayları ve savanalarıyla ünlüdür.",
-    "kg": "Kırgızistan, Orta Asya'da yer alan, dağlık ve göçebe kültürü ağırlıklı bir ülkedir.",
-    "kh": "Kamboçya, Güneydoğu Asya'da yer alır. Angkor Wat gibi görkemli antik tapınaklarıyla bilinir.",
-    "ki": "Kiribati, Pasifik Okyanusu'nda 33 mercan adasından oluşan bir takımadadır.",
-    "km": "Komorlar, Afrika'nın güneydoğu kıyısında, Hint Okyanusu'nda yer alan volkanik bir adalar grubudur.",
-    "kn": "Saint Kitts ve Nevis, Karayipler'de iki adadan oluşan, küçük bir federal ada devletidir.",
-    "kp": "Kuzey Kore, Doğu Asya'da Kore Yarımadası'nın kuzeyinde yer alan, izole edilmiş bir ülkedir.",
-    "kr": "Güney Kore, Doğu Asya'da yer alır. Yüksek teknoloji, K-Pop kültürü ve hızlı ekonomik gelişimiyle bilinir.",
-    "kw": "Kuveyt, Basra Körfezi'nde yer alan, yüksek petrol rezervlerine sahip küçük bir Arap emirliktir.",
-    "ky": "Cayman Adaları, Batı Karayipler'de İngiliz Denizaşırı Bölgesi'dir. Offshore finans merkezi olarak bilinir.",
-    "kz": "Kazakistan, Orta Asya'da yer alan, dünyanın en büyük denize kıyısı olmayan ülkesidir ve zengin doğal kaynaklara sahiptir.",
-    "la": "Laos, Güneydoğu Asya'da denize kıyısı olmayan, ormanlık ve Budist kültürü ağırlıklı bir ülkedir.",
-    "lb": "Lübnan, Orta Doğu'da Akdeniz kıyısında yer alır. Köklü bir ticari geçmişe ve kültürel çeşitliliğe sahiptir.",
-    "lc": "Saint Lucia, Karayipler'de yer alan, ikonik Pitons dağlarıyla ünlü bir ada devletidir.",
-    "li": "Lihtenştayn, Alpler'de İsviçre ve Avusturya arasında yer alan küçük bir prensliktir.",
-    "lk": "Sri Lanka, Hint Okyanusu'nda yer alan bir ada devletidir. Çay üretimi ve zengin Budist kültürüyle tanınır.",
-    "lr": "Liberya, Batı Afrika'da yer alır. Afrika'nın en eski cumhuriyetlerinden biridir ve ABD ile güçlü tarihi bağları vardır.",
-    "ls": "Lesoto, Güney Afrika Cumhuriyeti tarafından tamamen çevrili olan, yüksek rakımlı dağlık bir krallıktır.",
-    "lt": "Litvanya, Kuzey Avrupa'da Baltık Denizi kıyısında yer alan, tarihi ve kültürel mirası güçlü bir ülkedir.",
-    "lu": "Lüksemburg, Batı Avrupa'da yer alan küçük bir Büyük Dükalık'tır. Avrupa Birliği'nin önemli bir finans merkezidir.",
-    "lv": "Letonya, Kuzey Avrupa'da Baltık Denizi kıyısında yer alır. Ormanlık alanları ve Art Nouveau mimarisiyle bilinir.",
-    "ly": "Libya, Kuzey Afrika'da yer alır. Sahra Çölü'nün büyük bir bölümünü kapsar ve zengin petrol rezervlerine sahiptir.",
-    "ma": "Fas, Kuzey Afrika'da yer alır. Zengin Berberi, Arap ve Avrupa etkileşimlerinden oluşan eşsiz bir kültüre sahiptir.",
-    "mc": "Monako, Fransa kıyısında yer alan çok küçük bir prensliktir. Kumarhaneleri, Formula 1 yarışları ve yüksek yaşam standartlarıyla ünlüdür.",
-    "md": "Moldova, Doğu Avrupa'da denize kıyısı olmayan, şarapçılık ve tarımla geçinen küçük bir ülkedir.",
-    "me": "Karadağ, Balkanlar'da Adriyatik kıyısında yer alır. Fiyort benzeri körfezleri ve dağlık manzaralarıyla dikkat çeker.",
-    "mf": "Saint Martin (Fransız Bölgesi), Karayipler'de Fransa'ya ait kuzey yarısıdır. Turizm önemli gelir kaynağıdır.",
-    "mg": "Madagaskar, Afrika'nın güneydoğu kıyısında yer alan büyük bir ada devletidir. Özgün yaban hayatı ve lemurlarıyla tanınır.",
-    "mh": "Marshall Adaları, Pasifik Okyanusu'nda yer alan, ABD ile yakın bağları olan mercan adaları grubudur.",
-    "mk": "Kuzey Makedonya, Balkanlar'da yer alan, zengin kültürel miras ve antik tarihe sahip bir ülkedir.",
-    "ml": "Mali, Batı Afrika'da denize kıyısı olmayan, Sahra ve Sahel bölgelerinde yer alan bir ülkedir.",
-    "mm": "Myanmar, Güneydoğu Asya'da yer alan, altın pagodaları ve zengin kültürüyle tanınan bir ülkedir.",
-    "mn": "Moğolistan, Doğu ve Orta Asya'da denize kıyısı olmayan, göçebe kültürü ağırlıklı geniş bir ülkedir.",
-    "mo": "Makao, Çin'in özel idari bölgesidir. Asya'nın kumar ve eğlence merkezi olarak bilinir.",
-    "mp": "Kuzey Mariana Adaları, Pasifik Okyanusu'nda ABD'ye bağlı bir takımadadır.",
-    "mq": "Martinik, Karayipler'de Fransa'nın denizaşırı bir bölgesidir. Volkanik manzaraları ve tropikal ormanlarıyla ünlüdür.",
-    "mr": "Moritanya, Batı Afrika'da yer alır. Sahra Çölü'nün büyük bir bölümünü kapsayan geniş bir ülkedir.",
-    "ms": "Montserrat, Karayipler'de İngiliz Denizaşırı Bölgesi'dir. Aktif bir volkana sahip 'Zümrüt Adası' olarak bilinir.",
-    "mt": "Malta, Akdeniz'de yer alan küçük bir takımada devletidir. Köklü bir tarihe ve denizcilik kültürüne sahiptir.",
-    "mu": "Mauritius, Hint Okyanusu'nda yer alan volkanik bir ada devletidir. Turizm ve şeker üretimiyle ünlüdür.",
-    "mv": "Maldivler, Hint Okyanusu'nda yer alan, alçak mercan adaları ve lüks tatil köyleriyle ünlü bir takımadadır.",
-    "mw": "Malavi, Güneydoğu Afrika'da yer alan, Malavi Gölü'ne kıyısı olan ve tarımla geçinen bir ülkedir.",
-    "na": "Namibya, Güney Afrika'da yer alır. Namib Çölü, zengin elmas yatakları ve Alman sömürge mimarisiyle bilinir.",
-    "nc": "Yeni Kaledonya, Pasifik Okyanusu'nda Fransa'ya bağlı bir adalar grubudur. Zengin nikel rezervlerine sahiptir.",
-    "ne": "Nijer, Batı Afrika'da denize kıyısı olmayan, Sahra Çölü'nün büyük bir bölümünü kapsayan bir ülkedir.",
-    "nf": "Norfolk Adası, Pasifik Okyanusu'nda Avustralya'ya bağlı küçük bir adadır. Zengin bir İngiliz sömürge tarihine sahiptir.",
-    "ng": "Nijerya, Batı Afrika'nın en kalabalık ülkesidir. Afrika'nın en büyük ekonomilerinden biridir ve zengin petrol kaynaklarına sahiptir.",
-    "ni": "Nikaragua, Orta Amerika'da yer alır. Büyük gölleri, volkanları ve zengin doğal hayatıyla bilinir.",
-    "nl": "Hollanda, Batı Avrupa'da yer alır. Rüzgar değirmenleri, laleleri ve gelişmiş su yönetimi sistemiyle ünlüdür.",
-    "no": "Norveç, Kuzey Avrupa'da yer alır. Fiyortları, Kuzey Kutbu'na yakın konumu ve yüksek yaşam standartlarıyla bilinir.",
-    "np": "Nepal, Himalayalar'da yer alan denize kıyısı olmayan bir ülkedir. Everest Dağı ve zengin Budist/Hindu kültürüyle ünlüdür.",
-    "nr": "Nauru, Pasifik Okyanusu'nda dünyanın en küçük ada devletlerinden biridir.",
+    "ke": "Kenya, Doğu Afrika'da yer alır. Safari turları, Masai kültürü ve Büyük Rift Vadisi ile ünlüdür.",
+    "kg": "Kırgızistan, Orta Asya'da denize kıyısı olmayan, yüksek dağlar ve göçer kültürle tanınan bir ülkedir.",
+    "kh": "Kamboçya, Güneydoğu Asya'da yer alır. Angkor Wat tapınak kompleksiyle dünya çapında tanınır.",
+    "ki": "Kiribati, Pasifik Okyanusu'nda 33 mercan adasından oluşan bir ada devletidir. İklim değişikliğinden en çok etkilenen ülkelerdendir.",
+    "km": "Komorlar, Hint Okyanusu'nda volkanik bir takımadadır. Arap ve Afrika kültürlerinin karışımıyla bilinir.",
+    "kn": "Saint Kitts ve Nevis, Karayipler'de iki adadan oluşan küçük bir ülkedir.",
+    "kp": "Kuzey Kore, Doğu Asya'da yer alan, dünyanın en kapalı ve izole edilmiş ülkelerinden biridir.",
+    "kr": "Güney Kore, Doğu Asya'da yer alır. Yüksek teknoloji, pop kültürü (K-Pop) ve dinamik ekonomisiyle öne çıkar.",
+    "kw": "Kuveyt, Basra Körfezi'nde yer alan, zengin petrol rezervlerine sahip bir emirliktir.",
+    "ky": "Cayman Adaları, Karayipler'de İngiliz Denizaşırı Bölgesi'dir. Küresel bir offshore finans merkezidir.",
+    "kz": "Kazakistan, Orta Asya'da yer alan, dünyanın en büyük denize kıyısı olmayan ülkesidir. Uzay üssü (Baykonur) ile bilinir.",
+    "la": "Laos, Güneydoğu Asya'da denize kıyısı olmayan, Budist tapınakları ve Mekong Nehri ile tanınan bir ülkedir.",
+    "lb": "Lübnan, Orta Doğu'da Akdeniz kıyısında yer alır. Karmaşık tarihi ve kültürel çeşitliliğiyle 'Doğu'nun Paris'i' olarak anılırdı.",
+    "lc": "Saint Lucia, Karayipler'de volkanik Pitons dağlarıyla ünlü bir adadır.",
+    "li": "Lihtenştayn, Orta Avrupa'da İsviçre ve Avusturya arasında sıkışmış, küçük bir prensliktir. Finansal bir merkezdir.",
+    "lk": "Sri Lanka, Hint Okyanusu'nda yer alan bir ada devletidir. Çay üretimi, antik kalıntıları ve plajlarıyla ünlüdür.",
+    "lr": "Liberya, Batı Afrika'da yer alır. ABD tarafından kurulan ilk Afrika cumhuriyetidir.",
+    "ls": "Lesoto, Güney Afrika Cumhuriyeti'nin içinde yer alan, yüksek rakımlı, dağlık bir krallıktır.",
+    "lt": "Litvanya, Baltık devletlerinden biridir. Köklü bir tarihi ve Sovyet sonrası dönemde hızla gelişen bir ekonomisi vardır.",
+    "lu": "Lüksemburg, Batı Avrupa'da yer alan, dünyanın kişi başına düşen en yüksek GSYİH'sine sahip küçük bir ülkedir.",
+    "lv": "Letonya, Baltık devletlerinden biridir. Ahşap mimarisi ve canlı başkenti Riga ile bilinir.",
+    "ly": "Libya, Kuzey Afrika'da yer alır. Büyük bir Sahra çölü alanına ve zengin petrol kaynaklarına sahiptir.",
+    "ma": "Fas, Kuzeybatı Afrika'da yer alır. Atlantik ve Akdeniz kıyıları, Berberi kültürü ve renkli şehirleriyle turistik bir ülkedir.",
+    "mc": "Monako, Fransa kıyısında yer alan, dünyanın ikinci en küçük bağımsız ülkesidir. Kumarhaneleri ve Formula 1 yarışı ile ünlüdür.",
+    "md": "Moldova, Doğu Avrupa'da denize kıyısı olmayan, şarap üretimiyle tanınan bir ülkedir.",
+    "me": "Karadağ, Balkanlar'da Adriyatik Denizi'ne kıyısı olan, çarpıcı dağlık manzaralara sahip bir ülkedir.",
+    "mf": "Saint Martin (Fransız Bölgesi), Karayipler'de Fransız ve Hollanda arasında bölünmüş bir adadır.",
+    "mg": "Madagaskar, Afrika kıyısının açıklarında, eşsiz yaban hayatı ve lemurlarıyla ünlü büyük bir ada ülkesidir.",
+    "mh": "Marshall Adaları, Pasifik Okyanusu'nda bir takımadadır. ABD nükleer denemelerinin yapıldığı yer olarak bilinir.",
+    "mk": "Kuzey Makedonya, Balkanlar'da yer alan, antik tarihi ve doğal gölleriyle tanınan bir ülkedir.",
+    "ml": "Mali, Batı Afrika'da denize kıyısı olmayan, Sahra çölünün güneyinde yer alan, zengin bir tarihi imparatorluk geçmişine sahiptir.",
+    "mm": "Myanmar (Burma), Güneydoğu Asya'da yer alır. Binlerce Budist tapınağı (pagoda) ile ünlüdür.",
+    "mn": "Moğolistan, Doğu Asya'da denize kıyısı olmayan, Gobi Çölü'ne ve göçebe kültüre sahip bir ülkedir.",
+    "mo": "Makao, Çin'in özel idari bölgesidir. Asya'nın 'Las Vegas'ı' olarak anılan büyük bir kumar merkezidir.",
+    "mp": "Kuzey Mariana Adaları, Pasifik Okyanusu'nda ABD'ye ait bir takımadadır.",
+    "mq": "Martinik, Karayipler'de Fransa'nın denizaşırı bir bölgesidir.",
+    "mr": "Moritanya, Batı Afrika'da yer alır. Büyük kısmı Sahra Çölü'nden oluşur.",
+    "ms": "Montserrat, Karayipler'de İngiliz Denizaşırı Bölgesi'dir. Aktif bir volkana sahiptir.",
+    "mt": "Malta, Akdeniz'de küçük bir takımada ülkesidir. Köklü bir denizcilik tarihi ve tarihi kalelere sahiptir.",
+    "mu": "Mauritius, Hint Okyanusu'nda volkanik kökenli bir ada ülkesidir. Turizm ve şeker üretimiyle bilinir.",
+    "mv": "Maldivler, Hint Okyanusu'nda yer alan mercan atollerinden oluşan bir ada devletidir. Lüks turizmi ve dalış noktalarıyla ünlüdür.",
+    "mw": "Malavi, Güneydoğu Afrika'da yer alır. Malavi Gölü'ne ve tarıma dayalı ekonomiye sahiptir.",
+    "mz": "Mozambik, Güneydoğu Afrika'da Hint Okyanusu kıyısında yer alır. Uzun plajları ve Portekiz sömürge mirasına sahiptir.",
+    "na": "Namibya, Güneybatı Afrika'da yer alır. Namib Çölü, Sossusvlei kumulları ve zengin yaban hayatıyla ünlüdür.",
+    "nc": "Yeni Kaledonya, Pasifik Okyanusu'nda Fransa'ya ait bir takımadadır. Zengin nikel rezervlerine sahiptir.",
+    "ne": "Nijer, Batı Afrika'da denize kıyısı olmayan bir ülkedir. Büyük bir kısmı Sahra Çölü'nden oluşur.",
+    "nf": "Norfolk Adası, Pasifik Okyanusu'nda Avustralya'ya bağlı küçük bir adadır.",
+    "ng": "Nijerya, Batı Afrika'nın en kalabalık ülkesidir. Afrika'nın en büyük ekonomilerinden birine sahiptir.",
+    "ni": "Nikaragua, Orta Amerika'da yer alır. Büyük gölleri ve volkanlarıyla tanınır.",
+    "nl": "Hollanda, Batı Avrupa'da yer alır. Düz arazileri, kanalları, yel değirmenleri ve bisiklet kültürüyle ünlüdür.",
+    "no": "Norveç, İskandinavya'da yer alır. Fiyortları, yüksek yaşam standartları ve petrol zenginliği ile bilinir.",
+    "np": "Nepal, Himalayalar'da yer alan bir ülkedir. Everest Dağı'na ev sahipliği yapar ve Budizm ile Hinduizm'in kesişim noktasıdır.",
+    "nr": "Nauru, Pasifik Okyanusu'nda yer alan, dünyanın en küçük ada ülkesidir.",
     "nu": "Niue, Pasifik Okyanusu'nda Yeni Zelanda ile serbest birlik içinde olan büyük bir mercan adasıdır.",
-    "nz": "Yeni Zelanda, Güneybatı Pasifik'te yer alan bir ada devletidir. Çarpıcı doğal güzellikleri ve Maori kültürüyle tanınır.",
-    "om": "Umman, Arap Yarımadası'nın güneydoğu kıyısında yer alan, zengin denizcilik tarihine sahip bir sultanlıktır.",
-    "pa": "Panama, Orta ve Güney Amerika'yı birleştiren bir köprüdür. Panama Kanalı ile dünya ticareti için kritik öneme sahiptir.",
-    "pe": "Peru, Güney Amerika'nın batı kıyısında yer alır. İnka İmparatorluğu'nun mirası ve Machu Picchu Antik Kenti ile ünlüdür.",
-    "pf": "Fransız Polinezyası, Pasifik Okyanusu'nda Fransa'ya bağlı bir adalar grubudur. Bora Bora gibi lüks tatil adalarına ev sahipliği yapar.",
-    "pg": "Papua Yeni Gine, Pasifik Okyanusu'nda yer alır. Dünyanın en kültürel ve biyolojik açıdan çeşitli ülkelerinden biridir.",
-    "ph": "Filipinler, Pasifik Okyanusu'nda 7.000'den fazla adadan oluşan bir takımadadır. Yoğun kültürel çeşitliliğe sahiptir.",
-    "pk": "Pakistan, Güney Asya'da yer alır. Zengin İslami tarihi, İndus Nehri medeniyeti ve yüksek dağlarıyla bilinir.",
-    "pl": "Polonya, Orta Avrupa'da yer alır. Köklü bir tarihe, güçlü Katolik kültüre ve gelişmiş bir ekonomiye sahiptir.",
-    "pm": "Saint Pierre ve Miquelon, Kuzey Atlantik'te Kanada kıyısı açıklarında Fransa'ya bağlı küçük adalardır.",
-    "pn": "Pitcairn Adaları, Pasifik Okyanusu'nda yer alan, dünyanın en az nüfuslu İngiliz Denizaşırı Bölgesi'dir.",
-    "pr": "Porto Riko, Karayipler'de ABD'ye bağlı, İspanyol ve Amerikan etkileşimlerinden oluşan bir kültüre sahiptir.",
-    "ps": "Filistin, Orta Doğu'da yer alan, tarih boyunca birçok çatışmaya sahne olmuş ve statüsü tartışmalı topraklardır.",
-    "pt": "Portekiz, İber Yarımadası'nın batı ucunda yer alır. Zengin denizcilik tarihi ve keşifler dönemiyle ünlüdür.",
-    "pw": "Palau, Pasifik Okyanusu'nda yer alan, zengin deniz yaşamı ve dalış noktalarıyla ünlü bir takımadadır.",
-    "py": "Paraguay, Güney Amerika'da denize kıyısı olmayan, güçlü yerli ve İspanyol kültürü etkileşimlerine sahip bir ülkedir.",
-    "qa": "Katar, Basra Körfezi'nde yer alan küçük bir yarımada emirliktir. Zengin doğal gaz ve petrol kaynaklarına sahiptir.",
-    "re": "Reunion, Hint Okyanusu'nda yer alan, Fransa'nın denizaşırı bir bölgesidir. Aktif volkanları ve eşsiz biyoçeşitliliği ile ünlüdür.",
-    "ro": "Romanya, Güneydoğu Avrupa'da yer alır. Karpat Dağları, tarihi kaleleri ve efsaneleriyle bilinir.",
-    "rs": "Sırbistan, Balkanlar'da yer alan, zengin Slav kültürü ve çalkantılı siyasi tarihine sahip bir ülkedir.",
-    "rw": "Ruanda, Doğu Afrika'da yer alan, 'Bin Tepeler Ülkesi' olarak bilinir ve hızla gelişen bir ülkedir.",
-    "sb": "Solomon Adaları, Pasifik Okyanusu'nda yer alan, 990'dan fazla adadan oluşan bir takımadadır.",
-    "sc": "Seyşeller, Hint Okyanusu'nda yer alan 115 adadan oluşan, lüks turizmle geçinen tropikal bir cennettir.",
-    "sd": "Sudan, Kuzeydoğu Afrika'da yer alan, Nil Nehri'nin önemli bir bölümünü kapsayan büyük bir ülkedir.",
-    "se": "İsveç, Kuzey Avrupa'da yer alır. Yüksek refah düzeyi, tasarım kültürü ve doğal güzellikleriyle ünlüdür.",
-    "sg": "Singapur, Güneydoğu Asya'nın ucunda yer alan, küresel bir finans ve ticaret merkezi olan ada şehir devletidir.",
-    "sh": "Saint Helena, Ascension ve Tristan da Cunha, Güney Atlantik'te yer alan İngiliz Denizaşırı Bölgesi'dir. Napoleon'un sürgün yeri olarak bilinir.",
-    "si": "Slovenya, Orta Avrupa'da yer alan küçük bir ülkedir. Alp dağları ve Adriyatik kıyısı manzaralarına sahiptir.",
-    "sj": "Svalbard ve Jan Mayen, Kuzey Kutbu'nda yer alan, Norveç'e bağlı soğuk adalardır.",
-    "sk": "Slovakya, Orta Avrupa'da yer alır. Karpat Dağları'nın bir bölümünü kapsar ve zengin bir halk kültürüne sahiptir.",
-    "sl": "Sierra Leone, Batı Afrika'da yer alır. Zengin elmas kaynaklarına rağmen ekonomik zorluklar yaşamış bir ülkedir.",
-    "sm": "San Marino, İtalya tarafından tamamen çevrili olan dünyanın en eski cumhuriyetlerinden biridir.",
-    "sn": "Senegal, Batı Afrika'da yer alır. Canlı müzik, sanat ve Fransız sömürge mimarisiyle bilinir.",
-    "so": "Somali, Doğu Afrika'da yer alan, 'Afrika Boynuzu'nun ucunda stratejik bir konuma sahiptir.",
-    "sr": "Surinam, Güney Amerika'nın kuzeydoğu kıyısında yer alan, çok kültürlü bir yapıya sahip küçük bir ülkedir.",
-    "ss": "Güney Sudan, Afrika'nın en yeni ülkesidir. Nil Nehri'nin akışında önemli bir konuma sahiptir.",
-    "st": "Sao Tome ve Principe, Afrika'nın batı kıyısında yer alan küçük bir volkanik adalar grubudur.",
-    "sv": "El Salvador, Orta Amerika'da yer alır. Volkanlar ve kahve üretimiyle bilinir.",
-    "sx": "Sint Maarten (Hollanda Bölgesi), Karayipler'de Hollanda Krallığı'na bağlı güney yarısıdır. Turizm önemli gelir kaynağıdır.",
-    "sy": "Suriye, Orta Doğu'da yer alan, zengin antik tarihe ve kültürel mirasa sahip bir ülkedir.",
-    "sz": "Esvatini, Güney Afrika tarafından çevrili, küçük bir mutlak monarşi ülkesidir.",
-    "tc": "Turks ve Caicos Adaları, Atlantik Okyanusu'nda yer alan İngiliz Denizaşırı Bölgesi'dir. Lüks plajlarıyla ünlüdür.",
-    "td": "Çad, Orta Afrika'da denize kıyısı olmayan, Sahra ve Sahel bölgelerinde yer alan bir ülkedir.",
-    "tf": "Fransız Güney Toprakları, Hint Okyanusu'nda yer alan, Fransa'nın denizaşırı ıssız bölgeleridir.",
-    "tg": "Togo, Batı Afrika'da yer alan, dar bir kıyı şeridine ve tarıma dayalı bir ekonomiye sahip küçük bir ülkedir.",
-    "th": "Tayland, Güneydoğu Asya'da yer alır. Antik tapınakları, plajları ve canlı mutfağıyla popülerdir.",
-    "tj": "Tacikistan, Orta Asya'da yer alan denize kıyısı olmayan, yüksek dağlık bölgelere sahip bir ülkedir.",
-    "tk": "Tokelau, Pasifik Okyanusu'nda Yeni Zelanda'ya bağlı, üç mercan atolünden oluşan bir bölgedir.",
-    "tl": "Doğu Timor, Güneydoğu Asya'da yer alan bir ada devletidir. Portekiz ve Endonezya etkileşimli bir geçmişe sahiptir.",
-    "tm": "Türkmenistan, Orta Asya'da yer alan, zengin doğal gaz rezervlerine sahip, izole bir ülkedir.",
-    "tn": "Tunus, Kuzey Afrika'da yer alır. Zengin Fenike ve Roma tarihi mirasına sahiptir.",
-    "to": "Tonga, Pasifik Okyanusu'nda yer alan bir takımada krallığıdır. Avustralya'dan bağımsızlığını kazanan son Pasifik ülkelerindendir.",
-    "tv": "Tuvalu, Pasifik Okyanusu'nda yer alan, dokuz mercan atolünden oluşan küçük bir ada devletidir.",
-    "tw": "Tayvan, Doğu Asya'da yer alan bir ada devletidir. Yüksek teknoloji endüstrisi ve canlı kültürüyle bilinir.",
-    "tz": "Tanzanya, Doğu Afrika'da yer alır. Kilimanjaro Dağı ve ünlü Serengeti Ulusal Parkı'na ev sahipliği yapar.",
-    "ua": "Ukrayna, Doğu Avrupa'da yer alan, geniş tarım arazilerine ve zengin bir Slav kültürüne sahip büyük bir ülkedir.",
-    "ug": "Uganda, Doğu Afrika'da yer alan, Nil Nehri'nin kaynağına yakın konumu ve dağlık gorilleriyle ünlüdür.",
-    "um": "ABD Küçük Dış Adaları, Pasifik ve Karayipler'de yer alan, ABD'ye bağlı dokuz ıssız adalar grubudur.",
-    "uy": "Uruguay, Güney Amerika'da yer alan, yüksek refah düzeyi ve istikrarlı siyasetiyle öne çıkan küçük bir ülkedir.",
-    "uz": "Özbekistan, Orta Asya'da yer alan denize kıyısı olmayan bir ülkedir. İpek Yolu üzerindeki Semerkant ve Buhara gibi tarihi şehirleriyle ünlüdür.",
-    "va": "Vatikan, İtalya tarafından tamamen çevrili, Roma'da yer alan bağımsız bir şehir devletidir. Katolik Kilisesi'nin merkezidir.",
-    "vc": "Saint Vincent ve Grenadinler, Karayipler'de yer alan bir ada devletidir. Volkanik manzaraları ve yelken turizmiyle tanınır.",
-    "ve": "Venezuela, Güney Amerika'nın kuzey kıyısında yer alır. Zengin petrol rezervlerine, Angel Şelalesi'ne ve biyolojik çeşitliliğe sahiptir.",
-    "vg": "Britanya Virjin Adaları, Karayipler'de yer alan İngiliz Denizaşırı Bölgesi'dir. Yelken ve offshore finans merkezi olarak bilinir.",
-    "vi": "ABD Virjin Adaları, Karayipler'de yer alan, ABD'ye bağlı bir takımadadır. Güzel plajları ve turizmle popülerdir.",
-    "vn": "Vietnam, Güneydoğu Asya'da yer alan, pirinç tarlaları, uzun kıyı şeridi ve zengin tarihiyle bilinen bir ülkedir.",
-    "vu": "Vanuatu, Pasifik Okyanusu'nda yer alan, volkanik adalar ve eşsiz kabile kültürleriyle bilinen bir takımadadır.",
-    "wf": "Wallis ve Futuna, Pasifik Okyanusu'nda Fransa'ya bağlı bir adalar grubudur.",
-    "ws": "Samoa, Pasifik Okyanusu'nda yer alan, güçlü bir Polinezya kültürüne sahip bir ada devletidir.",
-    "ye": "Yemen, Arap Yarımadası'nın güney ucunda yer alan, köklü bir tarihe ve Arap kültürüne sahip bir ülkedir.",
-    "yt": "Mayotte, Hint Okyanusu'nda yer alan, Fransa'nın denizaşırı bir departmanıdır.",
-    "zm": "Zambiya, Güney Afrika'da denize kıyısı olmayan bir ülkedir. Victoria Şelalesi ve zengin maden kaynaklarıyla tanınır.",
-    "zw": "Zimbabve, Güney Afrika'da yer alan, zengin doğal kaynaklara ve yaban hayatına sahip bir ülkedir."
+    "nz": "Yeni Zelanda, Güneybatı Pasifik Okyanusu'nda yer alan iki büyük ve birçok küçük adadan oluşur. Doğal güzellikleri ve Maori kültürüyle ünlüdür.",
+    "om": "Umman, Arap Yarımadası'nın güneydoğusunda yer alan bir sultanlıktır. Köklü denizcilik geçmişi ve geleneksel mimarisiyle bilinir.",
+    "pa": "Panama, Orta Amerika'da yer alır. Panama Kanalı sayesinde küresel deniz taşımacılığı için kritik bir öneme sahiptir.",
+    "pe": "Peru, Güney Amerika'da yer alır. İnka İmparatorluğu'nun kalıntılarına (Machu Picchu) ve And Dağları'na ev sahipliği yapar.",
+    "pf": "Fransız Polinezyası, Pasifik Okyanusu'nda Fransa'ya bağlı bir takımadadır. Bora Bora gibi ünlü tatil adalarını içerir.",
+    "pg": "Papua Yeni Gine, Pasifik Okyanusu'nda yer alır. Biyolojik ve kültürel çeşitliliği çok yüksektir.",
+    "ph": "Filipinler, Güneydoğu Asya'da 7.000'den fazla adadan oluşan bir takımadadır.",
+    "pk": "Pakistan, Güney Asya'da yer alır. İndus Vadisi Uygarlığı'nın mirasını taşır ve Himalaya'daki yüksek dağlara sahiptir.",
+    "pl": "Polonya, Orta Avrupa'da yer alır. Zengin tarihi, restore edilmiş şehirleri ve Avrupa Birliği'nin önemli bir üyesidir.",
+    "pm": "Saint Pierre ve Miquelon, Kuzey Atlantik'te Fransa'ya ait küçük bir takımadadır.",
+    "pn": "Pitcairn Adaları, Pasifik Okyanusu'nda İngiliz Denizaşırı Bölgesi'dir. Dünyanın en az nüfuslu yargı alanıdır.",
+    "pr": "Porto Riko, Karayipler'de ABD'ye bağlı özerk bir bölgedir.",
+    "ps": "Filistin, Orta Doğu'da İsrail ile tartışmalı topraklardır.",
+    "pt": "Portekiz, İber Yarımadası'nda yer alır. Köklü denizcilik geçmişi ve keşifler çağıyla ünlüdür.",
+    "pw": "Palau, Pasifik Okyanusu'nda küçük bir ada devletidir. Eşsiz su altı doğal güzellikleriyle tanınır.",
+    "py": "Paraguay, Güney Amerika'da denize kıyısı olmayan bir ülkedir. Guarani kültürü ve büyük su kaynaklarına sahiptir.",
+    "qa": "Katar, Basra Körfezi'nde yer alan, zengin doğal gaz ve petrol kaynaklarına sahip bir emirliktir. Küresel spor etkinliklerine ev sahipliği yapmaktadır.",
+    "re": "Reunion, Hint Okyanusu'nda Fransa'nın denizaşırı bir departmanıdır. Aktif bir volkana sahiptir.",
+    "ro": "Romanya, Güneydoğu Avrupa'da yer alır. Transilvanya, Karpat Dağları ve zengin halk kültürüyle tanınır.",
+    "rs": "Sırbistan, Balkanlar'da yer alan bir ülkedir. Tuna Nehri ve köklü Slav kültürü önemlidir.",
+    "rw": "Ruanda, Doğu Afrika'da yer alır. 'Bin Tepenin Ülkesi' olarak bilinir ve hızla gelişen bir ekonomiye sahiptir.",
+    "sb": "Solomon Adaları, Pasifik Okyanusu'nda yer alan bir takımadadır. II. Dünya Savaşı'ndan kalma kalıntılara sahiptir.",
+    "sc": "Seyşeller, Hint Okyanusu'nda yer alan, lüks turizm ve doğal güzellikleriyle ünlü bir takımadadır.",
+    "sd": "Sudan, Kuzeydoğu Afrika'da yer alır. Nil Nehri ve geniş çöl alanları önemlidir.",
+    "se": "İsveç, İskandinavya'da yer alır. Yüksek yaşam kalitesi, ileri teknolojisi ve refah devleti modeliyle tanınır.",
+    "sg": "Singapur, Güneydoğu Asya'da küçük bir şehir devletidir. Dünyanın en önemli finans ve ticaret merkezlerinden biridir.",
+    "sh": "Saint Helena, Ascension ve Tristan da Cunha, Güney Atlantik'te yer alan İngiliz Denizaşırı Bölgesi'dir (Napolyon'un sürgün yeri).",
+    "si": "Slovenya, Orta Avrupa'da yer alır. Alp dağları, mağaraları ve yeşil doğasıyla tanınır.",
+    "sj": "Svalbard ve Jan Mayen, Norveç'e ait Arktik adalarıdır.",
+    "sk": "Slovakya, Orta Avrupa'da yer alır. Karpat Dağları ve tarihi kaleleriyle tanınır.",
+    "sl": "Sierra Leone, Batı Afrika'da yer alır. Elmas madenciliği ve tropik iklimi önemlidir.",
+    "sm": "San Marino, İtalya Yarımadası'nda yer alan, dünyanın en eski cumhuriyetlerinden biri olan mikro devlettir.",
+    "sn": "Senegal, Batı Afrika'da yer alır. Canlı müzik, kültür ve başkenti Dakar ile tanınır.",
+    "so": "Somali, Doğu Afrika'da yer alır. Uzun bir sahil şeridine ve çalkantılı bir siyasi geçmişe sahiptir.",
+    "sr": "Surinam, Güney Amerika'nın kuzeydoğu kıyısında yer alan, Hollanda sömürge mirasına sahip bir ülkedir.",
+    "ss": "Güney Sudan, Afrika'nın en genç bağımsız ülkesidir. Nil Nehri ve petrol kaynakları önemlidir.",
+    "st": "Sao Tome ve Principe, Gine Körfezi'nde yer alan bir ada devletidir. Kakao üretimiyle tanınır.",
+    "sv": "El Salvador, Orta Amerika'da yer alır. Volkanları ve Pasifik kıyı şeridi önemlidir.",
+    "sx": "Sint Maarten (Hollanda Bölgesi), Karayipler'de Fransız ve Hollanda arasında bölünmüş bir adadır.",
+    "sy": "Suriye, Orta Doğu'da yer alır. Köklü bir tarihi ve medeniyet geçmişine sahiptir.",
+    "sz": "Esvatini (Svaziland), Güney Afrika'da yer alan küçük bir krallıktır.",
+    "tc": "Turks ve Caicos Adaları, Karayipler'de İngiliz Denizaşırı Bölgesi'dir. Lüks turizmi ve plajlarıyla ünlüdür.",
+    "td": "Çad, Orta Afrika'da denize kıyısı olmayan, Sahra Çölü'nün büyük bir kısmını kaplayan bir ülkedir.",
+    "tf": "Fransız Güney Toprakları, Hint Okyanusu'nda Fransa'ya ait ıssız adalardır.",
+    "tg": "Togo, Batı Afrika'da küçük bir ülkedir. Fransız sömürge mirası ve sahilleri önemlidir.",
+    "th": "Tayland, Güneydoğu Asya'da yer alır. Budist tapınakları, plajları ve dinamik başkenti Bangkok ile turizm merkezidir.",
+    "tj": "Tacikistan, Orta Asya'da denize kıyısı olmayan, yüksek dağlar (Pamir) ve Fars kültürüyle tanınır.",
+    "tk": "Tokelau, Pasifik Okyanusu'nda Yeni Zelanda'ya bağlı bir takımadadır.",
+    "tl": "Doğu Timor, Güneydoğu Asya'da yer alan genç bir ülkedir. Portekiz ve Endonezya sömürge tarihinden izler taşır.",
+    "tm": "Türkmenistan, Orta Asya'da yer alır. Doğal gaz zenginliği ve izole edilmiş siyasi yapısıyla bilinir.",
+    "tn": "Tunus, Kuzey Afrika'da Akdeniz kıyısında yer alır. Antik Kartaca kalıntıları ve plajlarıyla tanınır.",
+    "to": "Tonga, Pasifik Okyanusu'nda yer alan, monarşi ile yönetilen bir takımadadır.",
+    "tv": "Tuvalu, Pasifik Okyanusu'nda yer alan, dokuz mercan adasından oluşan bir ada devletidir. İklim değişikliği tehdidi altındadır.",
+    "tw": "Tayvan, Doğu Asya'da bir adadır. Yüksek teknolojisi ve karmaşık siyasi statüsüyle tanınır.",
+    "tz": "Tanzanya, Doğu Afrika'da yer alır. Kilimanjaro Dağı, Serengeti Milli Parkı ve Zanzibar adasına ev sahipliği yapar.",
+    "ua": "Ukrayna, Doğu Avrupa'da yer alır. Avrupa'nın ikinci en büyük ülkesidir ve zengin tarım arazilerine sahiptir.",
+    "ug": "Uganda, Doğu Afrika'da yer alır. Nil Nehri'nin kaynağı ve goril safarileriyle tanınır.",
+    "um": "ABD Küçük Dış Adaları, Pasifik ve Karayipler'deki küçük ABD bölgeleridir.",
+    "uy": "Uruguay, Güney Amerika'da Arjantin ve Brezilya arasında yer alan küçük bir ülkedir. Yüksek yaşam standartları ve liberal yasalarıyla bilinir.",
+    "uz": "Özbekistan, Orta Asya'da denize kıyısı olmayan bir ülkedir. İpek Yolu üzerindeki tarihi Semerkant ve Buhara şehirleriyle ünlüdür.",
+    "va": "Vatikan, Roma içinde yer alan, dünyanın en küçük bağımsız ülkesidir ve Katolik Kilisesi'nin merkezidir.",
+    "vc": "Saint Vincent ve Grenadinler, Karayipler'de yer alan bir ada devletidir.",
+    "ve": "Venezuela, Güney Amerika'nın kuzeyinde yer alır. Zengin petrol rezervlerine ve Angel Şelalesi'ne sahiptir.",
+    "vg": "Britanya Virjin Adaları, Karayipler'de İngiliz Denizaşırı Bölgesi'dir. Yelken turizmi ve offshore finans merkezi olarak bilinir.",
+    "vi": "ABD Virjin Adaları, Karayipler'de ABD'ye bağlı bir bölgedir.",
+    "vn": "Vietnam, Güneydoğu Asya'da yer alır. Uzun bir sahil şeridi, pirinç tarlaları ve tarihi savaş geçmişi önemlidir.",
+    "vu": "Vanuatu, Pasifik Okyanusu'nda yer alan bir takımadadır. Volkanik adaları ve dalış noktalarıyla tanınır.",
+    "wf": "Wallis ve Futuna, Pasifik Okyanusu'nda Fransa'ya bağlı bir takımadadır.",
+    "ws": "Samoa, Pasifik Okyanusu'nda yer alan bir ada devletidir.",
+    "ye": "Yemen, Arap Yarımadası'nda yer alır. Köklü bir tarihi ve zorlu bir coğrafyası vardır.",
+    "yt": "Mayotte, Hint Okyanusu'nda Fransa'nın denizaşırı bir bölgesidir.",
+    "zm": "Zambiya, Güney Afrika'da denize kıyısı olmayan bir ülkedir. Victoria Şelaleleri ve bakır madenciliği ile tanınır.",
+    "zw": "Zimbabve, Güney Afrika'da yer alır. Victoria Şelaleleri'nin bir kısmına sahiptir ve zengin bir yaban hayatı vardır."
   };
 
-  // 3. Kod Düzeltme Haritası (fixMap) - SVG'deki yaygın isimleri ISO kodlarına eşler.
+
+  // 3. Kod Düzeltme Haritası (fixMap)
   const fixMap = {
-    turkey: "tr", usa: "us", america: "us", canada: "ca", france: "fr", germany: "de", 
-    england: "gb", uk: "gb",
+    turkey: "tr", 
+    usa: "us", 
+    america: "us", 
+    "united states": "us",
+    "united_states": "us",
+    "United States": "us", 
+    canada: "ca", 
+    france: "fr", 
+    germany: "de", 
+    england: "gb", 
+    uk: "gb",
   };
 
   // 4. SVG Tıklama Olayı Dinleyicisi
@@ -294,16 +310,21 @@ document.addEventListener("DOMContentLoaded", function () {
     let target = e.target.closest("path, polygon, g");
     if (!target) return;
 
+    // ID ve Class niteliklerini al
     const idAttr = (target.getAttribute("id") || "").toLowerCase();
-    const classAttr = (target.getAttribute("class") || "").toLowerCase();
+    const classAttr = (target.getAttribute("class") || ""); 
     
-    const tokens = (idAttr + " " + classAttr).trim().split(/\s+/).filter(Boolean);
-    
-    let foundToken = tokens.find(t => fixMap[t] || (t.length === 2 && countryNames[t]));
+    // Tıklanan öğeden olası ülke adlarını/kodlarını çıkar
+    const tokens = (idAttr + " " + classAttr.toLowerCase()).trim().split(/\s+/).filter(Boolean);
+    tokens.push(classAttr); 
+
+    // Eşleşen token'ı fixMap'te veya doğrudan 2 harfli kod olarak ara
+    let foundToken = tokens.find(t => fixMap[t] || (t.length === 2 && countryNames[t.toLowerCase()]));
     
     let rawCode = foundToken || tokens[0] || "";
     
-    let countryCode = fixMap[rawCode] || rawCode; 
+    // Ülke kodunu belirle
+    let countryCode = fixMap[rawCode] || rawCode.toLowerCase(); 
     
     if (!countryCode || !countryNames[countryCode]) {
         console.warn(`Ülke kodu bulunamadı veya tanınmadı. Tıklanan öğenin ID/Class: ${idAttr} / ${classAttr}`);
@@ -311,11 +332,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     const name = countryNames[countryCode];
-    // Tüm ülkeler için metin eklendiği için varsayılan uyarıya gerek kalmadı, ancak yine de yedek olarak durabilir.
-    const text = countryTexts[countryCode] || `**${name}** için metin bulunamadı.`; 
+    // Metin bulunamazsa genel bir uyarı metni göster
+    const text = countryTexts[countryCode] || `**${name}** için henüz detaylı bilgi metni girilmemiştir. Lütfen bu bilgiyi daha sonra kontrol edin.`; 
 
     // -------------------------------
-    // Yeni Sekme Açma ve Pop-up Engeli Kontrolü
+    // Yeni Sekme Açma İşlemi 
     // -------------------------------
     const newTab = window.open("", "_blank");
     
@@ -324,7 +345,6 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-    // Video dosya adı varsayılan olarak ISO kodunu kullanır (örn: tr.mp4)
     const videoFileName = countryCode; 
 
     newTab.document.write(`
@@ -367,6 +387,7 @@ document.addEventListener("DOMContentLoaded", function () {
       </body>
       </html>
     `);
+    newTab.document.close();
   });
 
 });
