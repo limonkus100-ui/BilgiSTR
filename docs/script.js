@@ -1,16 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
 
   const svg = document.querySelector("svg");
-  if (!svg) return; // SVG öğesi yoksa dur
+  if (!svg) {
+    console.error("SVG öğesi DOM'da bulunamadı. Lütfen HTML dosyanızdaki <svg> etiketinin varlığını kontrol edin.");
+    return;
+  }
 
   // 1. ÜLKE ADLARI VE KODLARI (ISO 3166-1 alpha-2) - TAM LİSTE
   const countryNames = {
-    // Türkiye, ABD ve diğer büyük ülkeler
     "tr": "Türkiye", "us": "Amerika Birleşik Devletleri", "ca": "Kanada", "ir": "İran", "iq": "Irak", 
     "de": "Almanya", "fr": "Fransa", "gb": "Birleşik Krallık", "es": "İspanya", "it": "İtalya",
-    "ru": "Rusya Federasyonu", "cn": "Çin", "jp": "Japonya", "au": "Avustralya", "br": "Brezilya",
+    "ru": "Rusya Federasyonu", "cn": "Çin", "Jp": "Japonya", "au": "Avustralya", "br": "Brezilya",
     "mx": "Meksika", "in": "Hindistan", "sa": "Suudi Arabistan", "eg": "Mısır", "za": "Güney Afrika",
-    
     // Tüm diğer ülkeler tamamlanmıştır:
     "ad": "Andorra", "ae": "Birleşik Arap Emirlikleri", "af": "Afganistan", "ag": "Antigua ve Barbuda", "ai": "Anguilla", "al": "Arnavutluk", "am": "Ermenistan", "ao": "Angola", "aq": "Antarktika", "ar": "Arjantin", "as": "Amerikan Samoası", "at": "Avusturya", "aw": "Aruba", "ax": "Aland Adaları", "az": "Azerbaycan",
     "ba": "Bosna-Hersek", "bb": "Barbados", "bd": "Bangladeş", "be": "Belçika", "bf": "Burkina Faso", "bg": "Bulgaristan", "bh": "Bahreyn", "bi": "Burundi", "bj": "Benin", "bl": "Saint Barthelemy", "bm": "Bermuda", "bn": "Brunei", "bo": "Bolivya", "bq": "Karayip Hollandası", "bs": "Bahamalar", "bt": "Bhutan", "bv": "Bouvet Adası", "bw": "Botsvana", "by": "Belarus", "bz": "Belize",
@@ -58,18 +59,18 @@ document.addEventListener("DOMContentLoaded", function () {
     "sa": "Suudi Arabistan, Arap Yarımadası'nda yer alır ve İslam'ın iki kutsal şehrine (Mekke ve Medine) ev sahipliği yapar. Başkenti Riyad'dır.",
     "eg": "Mısır, köklü antik uygarlığı ve Giza piramitleriyle ünlüdür. Nil Nehri ülkenin can damarıdır. Başkenti Kahire'dir.",
     "za": "Güney Afrika, çeşitli kültürleri, dilleri ve çarpıcı doğal güzellikleriyle 'Gökkuşağı Ulusu' olarak bilinir. Üç farklı başkenti (Pretoria, Cape Town, Bloemfontein) vardır.",
-    // Tüm diğer ülkelerin metinleri için:
-    // "ad": "Andorra, Pirene Dağları'nda yer alan...", 
-    // ...
+    // Diğer tüm ülkelerin metinleri de bu blokta yer almalıdır.
   };
 
 
-  // 3. Kod Düzeltme Haritası (fixMap) - Sadece temel kısaltmaları içerir
-  // Amerika ile ilgili hiçbir uzun isim eşleştirmesi burada yoktur.
+  // 3. Kod Düzeltme Haritası (fixMap) - SVG'deki uzun isimleri 2 harfli kodlara eşler
   const fixMap = {
     turkey: "tr", 
     usa: "us", 
-    america: "us", // usa ve america'nın zaten SVG'de 2 harfli kod yerine geçmesi beklenir
+    america: "us", 
+    "united states": "us",
+    "united_states": "us",
+    "United States": "us", // Tam isim eşleşmesi
     canada: "ca", 
     france: "fr", 
     germany: "de", 
@@ -82,13 +83,13 @@ document.addEventListener("DOMContentLoaded", function () {
     let target = e.target.closest("path, polygon, g");
     if (!target) return;
 
-    // ID ve Class niteliklerini al
+    // Tıklanan öğenin ID ve Class niteliklerini al
     const idAttr = (target.getAttribute("id") || "").toLowerCase();
     const classAttr = (target.getAttribute("class") || ""); 
     
-    // Tıklanan öğeden olası ülke adlarını/kodlarını çıkar
+    // Olası ülke adlarını/kodlarını çıkar
     const tokens = (idAttr + " " + classAttr.toLowerCase()).trim().split(/\s+/).filter(Boolean);
-    tokens.push(classAttr); // Orijinal class'ı da (eğer basit bir 2 harfli kod değilse) listeye ekle
+    tokens.push(classAttr); 
 
     // Eşleşen token'ı fixMap'te veya doğrudan 2 harfli kod olarak ara
     let foundToken = tokens.find(t => fixMap[t] || (t.length === 2 && countryNames[t.toLowerCase()]));
@@ -99,12 +100,11 @@ document.addEventListener("DOMContentLoaded", function () {
     let countryCode = fixMap[rawCode] || rawCode.toLowerCase(); 
     
     if (!countryCode || !countryNames[countryCode]) {
-        console.warn(`Ülke kodu bulunamadı veya tanınmadı. Tıklanan öğenin ID/Class: ${idAttr} / ${classAttr}`);
+        console.warn(`Ülke kodu bulunamadı veya tanınmadı. Tıklanan öğenin ID: "${idAttr}", Class: "${classAttr}". Lütfen SVG yapısını kontrol edin.`);
         return; 
     }
 
     const name = countryNames[countryCode];
-    // Metin bulunamazsa genel bir uyarı metni göster
     const text = countryTexts[countryCode] || `**${name}** için henüz detaylı bilgi metni girilmemiştir. Lütfen bu bilgiyi daha sonra kontrol edin.`; 
 
     // -------------------------------
