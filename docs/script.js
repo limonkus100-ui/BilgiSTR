@@ -125,8 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
     "za": "Güney Afrika", "zm": "Zambiya", "zw": "Zimbabve"
   };
 
-  // 2. ÜLKE BİLGİ METİNLERİ (Anahtarlar küçük harfe dönüştürülmüştür)
-  // BURAYA GİRDİĞİNİZ TÜM METİNLER KORUNMUŞTUR.
+  // 2. ÜLKE BİLGİ METİNLERİ (Tüm anahtarlar küçük harfe çevrilmiştir)
   const countryTexts = {
     "ad": "Andorra hakkında bilgi ve video.",
     "ae": "Birleşik Arap Emirlikleri hakkında bilgi ve video.",
@@ -359,7 +358,7 @@ document.addEventListener("DOMContentLoaded", function () {
     "tz": "Tanzanya hakkında bilgi ve video.",
     "ua": "Ukrayna hakkında bilgi ve video.",
     "ug": "Uganda hakkında bilgi ve video.",
-    "um": "Amerika Birleşik Devletleri Küçük Dış Adaları hakkında bilgi ve video.",
+    "um": "ABD Küçük Dış Adaları hakkında bilgi ve video.",
     "us": "Amerika Birleşik Devletleri hakkında bilgi ve video.",
     "uy": "Uruguay hakkında bilgi ve video.",
     "uz": "Özbekistan hakkında bilgi ve video.",
@@ -367,7 +366,7 @@ document.addEventListener("DOMContentLoaded", function () {
     "vc": "Saint Vincent ve Grenadinler hakkında bilgi ve video.",
     "ve": "Venezuela hakkında bilgi ve video.",
     "vg": "Britanya Virjin Adaları hakkında bilgi ve video.",
-    "vi": "Amerika Birleşik Devletleri Virjin Adaları hakkında bilgi ve video.",
+    "vi": "ABD Virjin Adaları hakkında bilgi ve video.",
     "vn": "Vietnam hakkında bilgi ve video.",
     "vu": "Vanuatu hakkında bilgi ve video.",
     "wf": "Wallis ve Futuna hakkında bilgi ve video.",
@@ -379,9 +378,16 @@ document.addEventListener("DOMContentLoaded", function () {
     "zw": "Zimbabve hakkında bilgi ve video.",
   };
 
-  // 3. Kod Düzeltme Haritası (SVG'deki yaygın isimleri ISO kodlarına eşler)
+  // 3. Kod Düzeltme Haritası (fixMap) - Yaygın isimleri ISO kodlarına eşler.
+  // Bu, özellikle ABD ve Kanada gibi ülkeler için önemlidir.
   const fixMap = {
-    turkey: "tr", usa: "us", france: "fr", germany: "de", england: "gb", uk: "gb",
+    turkey: "tr", 
+    usa: "us", 
+    canada: "ca", // <-- Kanada desteği eklendi
+    france: "fr", 
+    germany: "de", 
+    england: "gb", 
+    uk: "gb",
   };
 
   // 4. SVG Tıklama Olayı Dinleyicisi
@@ -392,25 +398,24 @@ document.addEventListener("DOMContentLoaded", function () {
     const idAttr = (target.getAttribute("id") || "").toLowerCase();
     const classAttr = (target.getAttribute("class") || "").toLowerCase();
     
-    // ID ve Class'taki olası ülke kodlarını/isimlerini arar
+    // Tıklanan öğenin ID veya Class'ından ülke kodunu veya ismini bulur
     const tokens = (idAttr + " " + classAttr).trim().split(/\s+/).filter(Boolean);
     
-    // fixMap'ten veya countryNames'ten eşleşen 2 haneli kodu bulur
-    let foundToken = tokens.find(t => fixMap[t] || countryNames[t]);
+    let foundToken = tokens.find(t => fixMap[t] || (t.length === 2 && countryNames[t]));
     
     let rawCode = foundToken || tokens[0] || "";
     
-    // SVG ID'si "france" ise "fr" kodu elde edilir
+    // Kodu fixMap üzerinden (örn. 'usa' -> 'us') veya doğrudan belirler
     let countryCode = fixMap[rawCode] || rawCode; 
     
-    // Geçerli bir kod yoksa veya metin listesinde tanımlı değilse dur
+    // Geçerli bir kod yoksa durur
     if (!countryCode || !countryNames[countryCode]) return;
 
     const name = countryNames[countryCode];
     
     // Metin listesinden bilgiyi çeker.
     const text = countryTexts[countryCode] || 
-                 `${name} için henüz detaylı bilgi metni girilmemiştir. Lütfen bu bilgiyi daha sonra kontrol edin.`;
+                 `**${name}** için henüz detaylı bilgi metni girilmemiştir. Lütfen bu bilgiyi daha sonra kontrol edin.`;
 
     // -------------------------------
     // Yeni Sekme Aç ve Video Otomatik Başlat
@@ -461,5 +466,4 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 });
-
 
