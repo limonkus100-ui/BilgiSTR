@@ -89,16 +89,82 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 3. Kod Düzeltme Haritası (fixMap) - Yaygın isimleri ISO kodlarına eşler.
   // Bu liste, 'id="usa"' veya 'class="canada"' gibi isimleri 2 haneli ISO koduna çevirir.
-  const fixMap = {
-    turkey: "tr", 
-    usa: "us", 
-    america: "us", // Olası varyasyon
-    canada: "ca", 
-    france: "fr", 
-    germany: "de", 
-    england: "gb", 
-    uk: "gb",
-  };
+const fixMap = {
+  // A Harfi
+  andorra: "ad", "unitedarabemirates": "ae", "afghanistan": "af", "antiguaandbarbuda": "ag", anguilla: "ai", albania: "al", armenia: "am", angola: "ao", antarctica: "aq", argentina: "ar", "americansamoa": "as", austria: "at", australia: "au", aruba: "aw", aland: "ax", "alandislands": "ax", azerbaijan: "az",
+
+  // B Harfi
+  "bosniaandherzegovina": "ba", barbados: "bb", bangladesh: "bd", belgium: "be", "burkinafaso": "bf", bulgaria: "bg", bahrain: "bh", burundi: "bi", benin: "bj", "saintbarthelemy": "bl", bermuda: "bm", brunei: "bn", bolivia: "bo", "caribbeannetherlands": "bq", brazil: "br", bahamas: "bs", bhutan: "bt", "bouvetisland": "bv", botswana: "bw", belarus: "by", belize: "bz",
+
+  // C Harfi
+  canada: "ca", "cocosislands": "cc", "drcongo": "cd", "congodemocraticrepublic": "cd", "centralafricanrepublic": "cf", congo: "cg", switzerland: "ch", "cotedivoire": "ci", "ivorycoast": "ci", "cookislands": "ck", chile: "cl", cameroon: "cm", china: "cn", colombia: "co", "costarica": "cr", cuba: "cu", "capeverde": "cv", curacao: "cw", "christmasisland": "cx", cyprus: "cy", czechia: "cz", "czechrepublic": "cz",
+
+  // D Harfi
+  germany: "de", djibouti: "dj", denmark: "dk", dominica: "dm", "dominicanrepublic": "do", algeria: "dz",
+
+  // E Harfi
+  ecuador: "ec", estonia: "ee", egypt: "eg", "westernsahara": "eh", eritrea: "er", spain: "es", ethiopia: "et",
+
+  // F Harfi
+  finland: "fi", fiji: "fj", "falklandislands": "fk", micronesia: "fm", "faroeislands": "fo", france: "fr",
+
+  // G Harfi
+  gabon: "ga", "unitedkingdom": "gb", "greatbritain": "gb", "uk": "gb", england: "gb", grenada: "gd", georgia: "ge", "frenchguiana": "gf", guernsey: "gg", ghana: "gh", gibraltar: "gi", greenland: "gl", gambia: "gm", guinea: "gn", guadeloupe: "gp", "equatorialguinea": "gq", greece: "gr", "southgeorgia": "gs", guatemala: "gt", guam: "gu", "guineabissau": "gw", guyana: "gy",
+
+  // H Harfi
+  "hongkong": "hk", "heardisland": "hm", honduras: "hn", croatia: "hr", haiti: "ht", hungary: "hu",
+
+  // I Harfi
+  indonesia: "id", ireland: "ie", israel: "il", "isleofman": "im", india: "in", "britishioc": "io", iraq: "iq", iran: "ir", iceland: "is", italy: "it",
+
+  // J Harfi
+  jersey: "je", jamaica: "jm", jordan: "jo", japan: "jp",
+
+  // K Harfi
+  kenya: "ke", kyrgyzstan: "kg", cambodia: "kh", kiribati: "ki", comoros: "km", "saintkitts": "kn", "northkorea": "kp", "southkorea": "kr", korea: "kr", kuwait: "kw", "caymanislands": "ky", kazakhstan: "kz",
+
+  // L Harfi
+  laos: "la", lebanon: "lb", "saintlucia": "lc", liechtenstein: "li", "srilanka": "lk", liberia: "lr", lesotho: "ls", lithuania: "lt", luxembourg: "lu", latvia: "lv", libya: "ly",
+
+  // M Harfi
+  morocco: "ma", monaco: "mc", moldova: "md", montenegro: "me", "saintmartin": "mf", madagascar: "mg", "marshallislands": "mh", "northmacedonia": "mk", mali: "ml", myanmar: "mm", mongolia: "mn", macao: "mo", "northernmariana": "mp", martinique: "mq", mauritania: "mr", montserrat: "ms", malta: "mt", mauritius: "mu", maldives: "mv", malawi: "mw", mexico: "mx", malaysia: "my", mozambique: "mz",
+
+  // N Harfi
+  namibia: "na", "newcaledonia": "nc", niger: "ne", "norfolkisland": "nf", nigeria: "ng", nicaragua: "ni", netherlands: "nl", norway: "no", nepal: "np", nauru: "nr", niue: "nu", "newzealand": "nz",
+
+  // O Harfi
+  oman: "om",
+
+  // P Harfi
+  panama: "pa", peru: "pe", "frenchpolynesia": "pf", "papuanewguinea": "pg", philippines: "ph", pakistan: "pk", poland: "pl", "saintpierre": "pm", "pitcairnislands": "pn", "puertorico": "pr", palestine: "ps", portugal: "pt", palau: "pw", paraguay: "py",
+
+  // Q Harfi
+  qatar: "qa",
+
+  // R Harfi
+  reunion: "re", romania: "ro", serbia: "rs", "russianfederation": "ru", russia: "ru", rwanda: "rw",
+
+  // S Harfi
+  "saudiarabia": "sa", "solomonislands": "sb", seychelles: "sc", sudan: "sd", sweden: "se", singapore: "sg", "saintelena": "sh", slovenia: "si", "svalbard": "sj", slovakia: "sk", "sierraleone": "sl", "sanmarino": "sm", senegal: "sn", somalia: "so", suriname: "sr", "southsudan": "ss", "saotome": "st", "elsalvador": "sv", "sintmaarten": "sx", syria: "sy", eswatini: "sz",
+
+  // T Harfi
+  "turksandcaicos": "tc", chad: "td", "frenchsouthernterritories": "tf", togo: "tg", thailand: "th", tajikistan: "tj", tokelau: "tk", "easttimor": "tl", turkmenistan: "tm", tunisia: "tn", tonga: "to", turkey: "tr", "trinidadandtobago": "tt", tuvalu: "tv", taiwan: "tw", tanzania: "tz",
+
+  // U Harfi
+  ukraine: "ua", uganda: "ug", "usminoroutlyingislands": "um", "usa": "us", "unitedstates": "us", "america": "us", uruguay: "uy", uzbekistan: "uz",
+
+  // V Harfi
+  vatican: "va", "saintvincent": "vc", venezuela: "ve", "brivirginislands": "vg", "usvirginislands": "vi", vietnam: "vn", vanuatu: "vu",
+
+  // W Harfi
+  "wallisandfutuna": "wf", samoa: "ws",
+
+  // Y Harfi
+  yemen: "ye", mayotte: "yt",
+
+  // Z Harfi
+  "southafrica": "za", zambia: "zm", zimbabwe: "zw",
+};
 
   // 4. SVG Tıklama Olayı Dinleyicisi
   svg.addEventListener("click", function (e) {
@@ -189,3 +255,4 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 });
+
