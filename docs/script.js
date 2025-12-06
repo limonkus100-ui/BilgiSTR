@@ -286,7 +286,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // 3. Kod Düzeltme Haritası (fixMap) - SVG'deki yaygın isimleri ISO kodlarına eşler.
   const fixMap = {
     turkey: "tr", usa: "us", america: "us", canada: "ca", france: "fr", germany: "de", 
-    england: "gb", uk: "gb",
+    england: "gb", uk: "gb", united-states-of-america": "us",
   };
 
   // 4. SVG Tıklama Olayı Dinleyicisi
@@ -370,3 +370,4 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 });
+
